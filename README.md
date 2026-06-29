@@ -50,6 +50,14 @@ Apesar do site ser simples, foi focado o back-end do site, nesse caso, o php, o 
 <img width="1679" height="882" alt="image" src="https://github.com/user-attachments/assets/ee221a97-607b-4636-870d-7c66798f19aa" />
 <img width="1679" height="881" alt="image" src="https://github.com/user-attachments/assets/f6ffe2f9-679f-4305-8558-018000a3eef1" />
 
+### ⚡ JavaScript (main.js)
+
+<img width="585" height="676" alt="image" src="https://github.com/user-attachments/assets/5c3b01f6-1cee-4d9f-b6b3-8be02997ecb8" />
+<img width="580" height="128" alt="image" src="https://github.com/user-attachments/assets/2ac9f072-167b-4d83-848e-ff907d68beb0" />
+<img width="626" height="248" alt="image" src="https://github.com/user-attachments/assets/b90e307d-313b-41db-b7c8-f19f643abc36" />
+<img width="591" height="218" alt="image" src="https://github.com/user-attachments/assets/48d8a3fe-d78a-4679-9d8a-f5a201ef4bd9" />
+
+não é possivel ultrapassar 500 caracteres
 ---
 
 ## 🚀 Tecnologias Utilizadas
