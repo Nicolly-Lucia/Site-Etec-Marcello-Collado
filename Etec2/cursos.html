@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Etec - Nossos Cursos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            background-image: url('https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            text-align: center;
+            color: white;
+            padding: 100px 0 80px;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.65);
+            z-index: 1;
+        }
+        
+        .hero-section .container {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: var(--primary-red);
+            color: white;
+            padding: 6px 18px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 25px;
+        }
+        
+        .hero-title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .hero-title .highlight {
+            color: var(--primary-red);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            opacity: 0.95;
+        }
+        
+        .hero-desc {
+            font-size: 1rem;
+            margin-bottom: 35px;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero-btns {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-primary-custom {
+            background: var(--primary-red);
+            color: white;
+            padding: 12px 32px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        
+        .btn-primary-custom:hover {
+            background: var(--dark-red);
+            transform: translateY(-2px);
+            color: white;
+        }
+        
+        .btn-outline-custom {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+            padding: 10px 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        
+        .btn-outline-custom:hover {
+            background: white;
+            color: var(--primary-red);
+            transform: translateY(-2px);
+        }
+        
+        /* Esconde o header antigo */
+        .courses-header {
+            display: none;
+        }
+        
+        /* Grid de cursos */
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 35px;
+            margin: 50px 0;
+        }
+        
+        .course-card {
+            background: white;
+            padding: 0;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .course-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--medium-blue), var(--primary-red));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+            z-index: 2;
+        }
+        
+        .course-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .course-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.12);
+        }
+        
+        .card-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+            transition: all 0.3s ease;
+        }
+        
+        .course-card:hover .card-image {
+            transform: scale(1.02);
+        }
+        
+        .card-content {
+            padding: 0 25px 25px;
+            text-align: center;
+        }
+        
+        .course-card h3 {
+            font-size: 1.35rem;
+            margin: 20px 0 12px;
+            color: #1a2a3a;
+            font-weight: 700;
+        }
+        
+        .course-card p {
+            color: #5a6a7a;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .card-btn {
+            display: inline-block;
+            background: transparent;
+            color: var(--medium-blue);
+            border: 1px solid var(--medium-blue);
+            padding: 8px 24px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        
+        .card-btn:hover {
+            background: var(--medium-blue);
+            color: white;
+        }
+        
+        .card-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--primary-red);
+            color: white;
+            padding: 4px 10px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+        
+        /* Seção de estatísticas */
+        .stats-section {
+            background: var(--light-blue);
+            padding: 50px 20px;
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--medium-blue);
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 0.85rem;
+            color: #5a6a7a;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* CTA */
+        .cta-section {
+            background: #1a2a3a;
+            padding: 50px 40px;
+            text-align: center;
+            margin: 40px 0 0;
+        }
+        
+        .cta-section h3 {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .cta-section p {
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 25px;
+        }
+        
+        .cta-btn {
+            background: var(--medium-blue);
+            color: white;
+            border: none;
+            padding: 12px 35px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .cta-btn:hover {
+            background: var(--dark-blue);
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 70px 0 50px;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+            
+            .card-image {
+                height: 150px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo-container">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTp26IKAuPY8kmuEfZ_U5UraZF-RJx4jI1frQ&s" alt="Centro Paula Souza" class="logo">
+            <span class="etec-name">Etec Zona Leste</span>
+        </div>
+        <ul>
+            <li><a href="index.html">Início</a></li>
+            <li><a href="cursos.html" class="active">Cursos</a></li>
+            <li><a href="quem-somos.html">Sobre</a></li>
+            <li><a href="contato.html">Contato</a></li>
+        </ul>
+    </nav>
+
+    <!-- hero section -->
+    <section class="hero-section">
+        <div class="container text-center">
+            <div class="hero-badge">Cursos Técnicos</div>
+            <h1 class="hero-title">Escolha seu caminho.<br><span class="highlight">Construa seu futuro.</span></h1>
+            <h2 class="hero-subtitle">Mais de 15 opções para você se destacar no mercado</h2>
+            <p class="hero-desc">Cursos gratuitos, professores experientes e infraestrutura de ponta.</p>
+            <div class="hero-btns">
+                <a href="#cursos" class="btn-primary-custom">Ver Cursos</a>
+                <a href="contato.html" class="btn-outline-custom">Falar Conosco</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="container" id="cursos">
+        <!-- Grid de cursos -->
+        <div class="courses-grid">
+            <!-- Curso 1 - Desenvolvimento de Sistemas -->
+            <div class="course-card">
+                <div class="card-badge">5 anos</div>
+                <img src="https://images.unsplash.com/photo-1580894894513-541e068a3e2b?w=400&h=200&fit=crop" alt="Desenvolvimento de Sistemas" class="card-image">
+                <div class="card-content">
+                    <h3>Desenvolvimento de Sistemas</h3>
+                    <p>Aprenda a criar softwares, aplicativos e sistemas web com as tecnologias mais requisitadas do mercado.</p>
+                    <button class="card-btn" onclick="alert('Matrículas abertas para 2026!')">Ver detalhes</button>
+                </div>
+            </div>
+
+            <!-- Curso 2 - Administração -->
+            <div class="course-card">
+                <div class="card-badge">3 anos</div>
+                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=200&fit=crop" alt="Administração" class="card-image">
+                <div class="card-content">
+                    <h3>Administração</h3>
+                    <p>Domine gestão empresarial, marketing, finanças e RH. Prepare-se para liderar equipes e negócios.</p>
+                    <button class="card-btn" onclick="alert('Matrículas abertas para 2026!')">Ver detalhes</button>
+                </div>
+            </div>
+
+            <!-- Curso 3 - Logística -->
+            <div class="course-card">
+                <div class="card-badge">3 anos</div>
+                <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=400&h=200&fit=crop" alt="Logística" class="card-image">
+                <div class="card-content">
+                    <h3>Logística</h3>
+                    <p>Gerencie cadeias de suprimentos, transporte e armazenagem. Essencial para o comércio global.</p>
+                    <button class="card-btn" onclick="alert('Matrículas abertas para 2026!')">Ver detalhes</button>
+                </div>
+            </div>
+
+            <!-- Curso 4 - Contabilidade -->
+            <div class="course-card">
+                <div class="card-badge">3 anos</div>
+                <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&h=200&fit=crop" alt="Contabilidade" class="card-image">
+                <div class="card-content">
+                    <h3>Contabilidade</h3>
+                    <p>Controle financeiro, análise de balanços, impostos e auditoria. Profissional essencial nas empresas.</p>
+                    <button class="card-btn" onclick="alert('Matrículas abertas para 2026!')">Ver detalhes</button>
+                </div>
+            </div>
+
+            <!-- Curso 5 - Serviços Jurídicos -->
+            <div class="course-card">
+                <div class="card-badge">3 anos</div>
+                <img src="https://images.unsplash.com/photo-1589578228447-e1a4e481c6c8?w=400&h=200&fit=crop" alt="Serviços Jurídicos" class="card-image">
+                <div class="card-content">
+                    <h3>Serviços Jurídicos</h3>
+                    <p>Atue em escritórios de advocacia e departamentos legais com rotinas administrativas e jurídicas.</p>
+                    <button class="card-btn" onclick="alert('Matrículas abertas para 2026!')">Ver detalhes</button>
+                </div>
+            </div>
+
+            <!-- Curso 6 - Recursos Humanos -->
+            <div class="course-card">
+                <div class="card-badge">5 anos</div>
+                <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=400&h=200&fit=crop" alt="Recursos Humanos" class="card-image">
+                <div class="card-content">
+                    <h3>Recursos Humanos</h3>
+                    <p>Recrutamento, seleção, treinamento e gestão de pessoas. Transforme vidas nas organizações.</p>
+                    <button class="card-btn" onclick="alert('Matrículas abertas para 2026!')">Ver detalhes</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Seção de estatísticas -->
+        <div class="stats-section">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number">+90%</span>
+                    <span class="stat-label">Empregabilidade</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">15+</span>
+                    <span class="stat-label">Anos de história</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">6+</span>
+                    <span class="stat-label">Cursos técnicos</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">20+</span>
+                    <span class="stat-label">Laboratórios</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="cta-section">
+        <h3>Pronto para começar sua jornada?</h3>
+        <p>Entre em contato caso tenha dúvidas sobre cursos, matrículas ou qualquer outro assunto</p>
+        <button class="cta-btn" onclick="window.location.href='contato.html'">Fale com um consultor</button>
+    </div>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-col">
+            <h4>Sobre a Etec</h4>
+            <p>Mais de 15 anos formando profissionais que transformam a sociedade. Cursos técnicos gratuitos e de qualidade.</p>
+        </div>
+        <div class="footer-col">
+            <h4>Links Rápidos</h4>
+            <ul class="footer-links">
+                <li><a href="index.html">Início</a></li>
+                <li><a href="cursos.html">Cursos</a></li>
+                <li><a href="quem-somos.html">Sobre</a></li>
+                <li><a href="contato.html">Contato</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Contato</h4>
+            <p><i class="fas fa-map-marker-alt"></i> Rua Exemplo, 123 - São Paulo, SP</p>
+            <p><i class="fas fa-phone"></i> (11) 99999-9999</p>
+            <p><i class="fas fa-envelope"></i> contato@etec.sp.gov.br</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2026 Etec Zona Leste - Centro Paula Souza. Todos os direitos reservados.</p>
+        <div class="social-icons">
+            <a href="https://web.facebook.com/Eteczonalesteoficial/?_rdc=1&_rdr#" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.instagram.com/eteczonalesteoficial/" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.youtube.com/@etecdazonaleste2949" target="_blank"><i class="fab fa-youtube"></i></a>
+            <a href="https://wa.me/5511999999999" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        </div>
+    </div>
+</footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
